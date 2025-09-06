@@ -5,8 +5,12 @@ const app = express();
 app.use(helmet.hidePoweredBy());
 app.use(helmet.frameguard({action: 'DENY'}));
 app.use(helmet.xssFilter());
-app.use (helmet.noSniff());
-app.use (helmet.ieNoOpen());
+app.use(helmet.noSniff());
+app.use(helmet.ieNoOpen());
+const timeInSeconds = 90 * 24 * 60 * 60;
+app.use(helmet.hsts({maxAge: timeInSeconds, force: true}));
+
+
 
 
 module.exports = app;
